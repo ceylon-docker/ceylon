@@ -54,4 +54,9 @@ And the following contents of the `Dockerfile`:
 
 NB: You can of course pre-compile the sources and add the resulting `modules` folder to the image instead of the sources and just immediately run the code without compiling.
 
+NB2: The image gives you an unprivileged user by default to better protect the host. If you want to give that user `sudo` rights you could add the following lines to your `Dockerfile`:
+
+    USER root
+    RUN echo 'ceylon ALL=(ALL:ALL) NOPASSWD: ALL' > /etc/sudoers.d/ceylon
+    USER ceylon
 
