@@ -41,16 +41,16 @@ The image can also be used to easily create application images. When you create 
 
     FROM ceylon/ceylon
 
-all the local files in the same folder will automatically be added to the image. And if a shell script with the name `start-app.sh` exists it will be executed automatically when running the image. This all together makes it easy to wrap everything into a simple application bundle, imagine the following folder structure for example:
+all the local files in the same folder will automatically be added to the image. Then you just need to add a single `CMD` to your `Dockerfile` to run the code and you're done. This all together makes it easy to wrap everything into a simple application bundle, imagine the following folder structure for example:
 
     ./Dockerfile
-    ./start-app.sh
     ./source/my/app/module.ceylon
     ./source/my/app/run.ceylon
 
-And a `start-app.sh` file with the following command:
+And the following contents of the `Dockerfile`:
 
-    ceylon run --compile my.app
+    FROM ceylon/ceylon
+    CMD ceylon run --compile my.app
 
 NB: You can of course pre-compile the sources and add the resulting `modules` folder to the image instead of the sources and just immediately run the code without compiling.
 
