@@ -12,7 +12,7 @@ The following images/tags are available:
 
 A one-liner that shows how you could execute single `ceylon` commands:
 
-    docker run -ti --rm ceylon/ceylon:1.2.0 ceylon src,compile,run com.example.helloworld
+    docker run -ti --rm ceylon/ceylon ceylon src,compile,run com.example.helloworld
 
 You can combine this with the `-v` option to execute the command on some local files, for example:
 
