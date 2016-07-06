@@ -1,0 +1,15 @@
+#
+# Base image for compiling and running Ceylon applications
+#
+FROM @@FROM@@
+
+USER ceylon
+
+VOLUME /app
+
+ADD bootstrap.sh /bootstrap.sh
+
+ONBUILD ADD . /app
+
+CMD ["/bootstrap.sh"]
+

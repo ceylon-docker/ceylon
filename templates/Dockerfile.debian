@@ -1,0 +1,33 @@
+#
+# Base image for compiling and running Ceylon applications
+#
+FROM @@FROM@@
+
+MAINTAINER Tako Schotanus <tako@ceylon-lang.org>
+
+ENV CEYLON_VERSION @@VERSION@@
+
+LABEL org.ceylon-lang.dockerfile.description="Base image for compiling and running Ceylon applications" \
+    org.ceylon-lang.dockerfile.vendor="RedHat" \
+    org.ceylon-lang.dockerfile.version="1.2" \
+    org.ceylon-lang.ceylon.version="${CEYLON_VERSION}"
+
+USER root
+
+RUN apt-get -y update && \
+    apt-get -y install apt-transport-https less vim nodejs && \
+    wget -O - https://downloads.ceylon-lang.org/apt/ceylon-debian-repo.gpg.key | apt-key add - && \
+    echo "deb https://downloads.ceylon-lang.org/apt/ unstable main" > /etc/apt/sources.list.d/ceylon.list && \
+    apt-get -y update && \
+    apt-get install -y ceylon-${CEYLON_VERSION} && \
+    apt-get clean && \
+    groupadd -r ceylon -g 1000 && \
+    useradd -u 1000 -m -s /usr/sbin/nologin -g ceylon -d /app ceylon && \
+    mkdir -p /app/.ceylon/cache && \
+    chown -R ceylon:ceylon /app && \
+    chmod -R 755 /app
+
+USER ceylon
+
+WORKDIR /app
+
