@@ -31,3 +31,7 @@ USER ceylon
 
 WORKDIR /app
 
+ADD bootstrap.sh /bootstrap.sh
+
+CMD ["/bootstrap.sh"]
+

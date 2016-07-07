@@ -7,9 +7,5 @@ USER ceylon
 
 VOLUME /app
 
-ADD bootstrap.sh /bootstrap.sh
-
 ONBUILD ADD . /app
-
-CMD ["/bootstrap.sh"]
 

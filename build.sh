@@ -67,7 +67,7 @@ function build_branch() {
     sed -i "s/@@FROM@@/$FROM/g" /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@VERSION@@/$VERSION/g" /tmp/docker-ceylon-build-templates/Dockerfile
     git checkout -q -B $BRANCH
-    rm -rf build.sh templates
+    rm -rf build.sh templates LICENSE README.md
     cp /tmp/docker-ceylon-build-templates/* .
     rm -rf /tmp/docker-ceylon-build-templates
     [[ $VERIFY -eq 1 ]] && docker build -t "ceylon/ceylon:$BRANCH" -q .
@@ -100,8 +100,8 @@ function build_normal_onbuild() {
     done
 
     NAME="$VERSION-$JRE-$PLATFORM"
-    build_branch $VERSION $FROM $NAME "Dockerfile.$PLATFORM" 0 "${TAGS[@]}"
-    build_branch $VERSION "ceylon\\/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 1 "${OBTAGS[@]}"
+    build_branch $VERSION $FROM $NAME "Dockerfile.$PLATFORM" 1 "${TAGS[@]}"
+    build_branch $VERSION "ceylon\\/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 0 "${OBTAGS[@]}"
 }
 
 function build_jres() {
