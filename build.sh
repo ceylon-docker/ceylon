@@ -66,17 +66,17 @@ function build_branch() {
     cp templates/$DOCKERFILE /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@FROM@@/$FROM/g" /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@VERSION@@/$VERSION/g" /tmp/docker-ceylon-build-templates/Dockerfile
-    git checkout -q -B $BRANCH
+    git checkout --quiet $(git show-ref --verify --quiet refs/heads/$BRANCH || echo '-b') $BRANCH
     rm -rf build.sh templates LICENSE README.md
     cp /tmp/docker-ceylon-build-templates/* .
     rm -rf /tmp/docker-ceylon-build-templates
     [[ $VERIFY -eq 1 ]] && docker build -t "ceylon/ceylon:$BRANCH" -q .
     git add .
-    git commit -q -m "Updated Dockerfile for $VERSION"
+    git commit -q -m "Updated Dockerfile for $VERSION" || true
     for t in ${TAGS[@]}; do
         git tag -f $t
     done
-    [[ $PUSH -eq 1 ]] && git push -u origin $BRANCH && git push --force --tags
+    [[ $PUSH -eq 1 ]] && git push -u origin $BRANCH
     git checkout -q master
 }
 
@@ -146,4 +146,5 @@ function build() {
 for v in ${VERSIONS[@]}; do
     build $v
 done
+[[ $PUSH -eq 1 ]] && git push --force --tags
 
