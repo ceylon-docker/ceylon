@@ -73,10 +73,11 @@ function build_branch() {
     [[ $VERIFY -eq 1 ]] && docker build -t "ceylon/ceylon:$BRANCH" -q .
     git add .
     git commit -q -m "Updated Dockerfile for $VERSION" || true
+    [[ $PUSH -eq 1 ]] && git push -u origin $BRANCH
     for t in ${TAGS[@]}; do
         git tag -f $t
+        [[ $PUSH -eq 1 ]] && git push --force origin $t
     done
-    [[ $PUSH -eq 1 ]] && git push -u origin $BRANCH
     git checkout -q master
 }
 
@@ -146,5 +147,4 @@ function build() {
 for v in ${VERSIONS[@]}; do
     build $v
 done
-[[ $PUSH -eq 1 ]] && git push --force --tags
 
