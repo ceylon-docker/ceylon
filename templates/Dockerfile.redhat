@@ -5,7 +5,7 @@ FROM @@FROM@@
 
 MAINTAINER Tako Schotanus <tako@ceylon-lang.org>
 
-ENV CEYLON_VERSION @@VERSION@@ \
+ENV CEYLON_VERSION=@@VERSION@@ \
     LANG=en_US.utf8
 
 LABEL org.ceylon-lang.dockerfile.description="Base image for compiling and running Ceylon applications" \
