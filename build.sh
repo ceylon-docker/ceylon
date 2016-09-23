@@ -17,21 +17,23 @@ DEFAULT_JRE=8
 # Define default platform
 DEFAULT_PLATFORM="debian"
 
-VERIFY=0
+IMAGE=docker.io/ceylon/ceylon
+
+BUILD=0
 PUSH=0
 for arg in "$@"; do
     case "$arg" in
         --help)
-            echo "Usage: $0 [--help] [--verify] [--push]"
+            echo "Usage: $0 [--help] [--build] [--push]"
             echo ""
             echo "   --help   : shows this help text"
-            echo "   --verify : runs 'docker build' for each image"
-            echo "   --push   : pushes each branch and its tags to Git"
+            echo "   --build  : runs 'docker build' for each image"
+            echo "   --push   : pushes each image to Docker Hub"
             echo ""
             exit
             ;;
-        --verify)
-            VERIFY=1
+        --build)
+            BUILD=1
             ;;
         --push)
             PUSH=1
@@ -40,87 +42,90 @@ for arg in "$@"; do
 done
 
 function error() {
-    MSG=$1
+    local MSG=$1
     [[ ! -z $MSG ]] && echo $MSG
     exit 1
 }
 
-function build_branch() {
-    VERSION=$1
-    [[ -z $VERSION ]] && error "Missing 'version' parameter for build_branch()"
-    FROM=$2
-    [[ -z $FROM ]] && error "Missing 'from' parameter for build_branch()"
-    BRANCH=$3
-    [[ -z $BRANCH ]] && error "Missing 'branch' parameter for build_branch()"
-    DOCKERFILE=$4
-    [[ -z $DOCKERFILE ]] && error "Missing 'dockerfile' parameter for build_branch()"
-    INCLUDE_BOOTSTRAP=$5
-    [[ -z $INCLUDE_BOOTSTRAP ]] && error "Missing 'include_bootstrap' parameter for build_branch()"
+function build_dir() {
+    local VERSION=$1
+    [[ -z $VERSION ]] && error "Missing 'version' parameter for build_dir()"
+    local FROM=$2
+    [[ -z $FROM ]] && error "Missing 'from' parameter for build_dir()"
+    local NAME=$3
+    [[ -z $NAME ]] && error "Missing 'name' parameter for build_dir()"
+    local DOCKERFILE=$4
+    [[ -z $DOCKERFILE ]] && error "Missing 'dockerfile' parameter for build_dir()"
+    local INCLUDE_BOOTSTRAP=$5
+    [[ -z $INCLUDE_BOOTSTRAP ]] && error "Missing 'include_bootstrap' parameter for build_dir()"
     shift 5
-    TAGS=("$@")
+    local TAGS=("$@")
 
-    echo "Building branch $BRANCH with tags ${TAGS[@]} ..."
+    echo "Building image $NAME with tags ${TAGS[@]} ..."
     rm -rf /tmp/docker-ceylon-build-templates
     mkdir /tmp/docker-ceylon-build-templates
     [[ $INCLUDE_BOOTSTRAP -eq 1 ]] && cp templates/bootstrap.sh /tmp/docker-ceylon-build-templates/
     cp templates/$DOCKERFILE /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@FROM@@/$FROM/g" /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@VERSION@@/$VERSION/g" /tmp/docker-ceylon-build-templates/Dockerfile
-    git checkout --quiet $(git show-ref --verify --quiet refs/heads/$BRANCH || echo '-b') $BRANCH
-    rm -rf build.sh templates LICENSE README.md
+    mkdir -p "$NAME"
+    pushd "$NAME" > /dev/null
     cp /tmp/docker-ceylon-build-templates/* .
     rm -rf /tmp/docker-ceylon-build-templates
-    [[ $VERIFY -eq 1 ]] && docker build -t "ceylon/ceylon:$BRANCH" -q .
-    git add .
-    git commit -q -m "Updated Dockerfile for $VERSION" || true
-    [[ $PUSH -eq 1 ]] && git push -u origin $BRANCH
+    if [[ $BUILD -eq 1 ]]; then
+        echo "Pulling existing image from Docker Hub (if any)..."
+        docker pull "${IMAGE}:$NAME" > /dev/null
+        echo "Building image..."
+        docker build -t "${IMAGE}:$NAME" -q .
+    fi
+    [[ $PUSH -eq 1 ]] && echo "Pushing image to Docker Hub..." && docker push "${IMAGE}:$NAME"
     for t in ${TAGS[@]}; do
-        git tag -f $t
-        [[ $PUSH -eq 1 ]] && git push --force origin $t
+        [[ $BUILD -eq 1 ]] && docker tag "${IMAGE}:$NAME" "${IMAGE}:$t"
+        [[ $PUSH -eq 1 ]] && docker push "${IMAGE}:$t"
     done
-    git checkout -q master
+    popd > /dev/null
 }
 
 function build_normal_onbuild() {
-    VERSION=$1
+    local VERSION=$1
     [[ -z $VERSION ]] && error "Missing 'version' parameter for build_normal_onbuild()"
-    FROM=$2
+    local FROM=$2
     [[ -z $FROM ]] && error "Missing 'from' parameter for build_normal_onbuild()"
-    JRE=$3
+    local JRE=$3
     [[ -z $JRE ]] && error "Missing 'jre' parameter for build_normal_onbuild()"
-    PLATFORM=$4
+    local PLATFORM=$4
     [[ -z $PLATFORM ]] && error "Missing 'platform' parameter for build_normal_onbuild()"
     shift 4
-    TAGS=("$@")
+    local TAGS=("$@")
 
     echo "Building for JRE $JRE with tags ${TAGS[@]} ..."
 
-    OBTAGS=()
+    local OBTAGS=()
     for t in ${TAGS[@]}; do
         OBTAGS+=("$t-onbuild")
     done
 
-    NAME="$VERSION-$JRE-$PLATFORM"
-    build_branch $VERSION $FROM $NAME "Dockerfile.$PLATFORM" 1 "${TAGS[@]}"
-    build_branch $VERSION "ceylon\\/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 0 "${OBTAGS[@]}"
+    local NAME="$VERSION-$JRE-$PLATFORM"
+    build_dir $VERSION $FROM $NAME "Dockerfile.$PLATFORM" 1 "${TAGS[@]}"
+    build_dir $VERSION "ceylon\\/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 0 "${OBTAGS[@]}"
 }
 
 function build_jres() {
-    VERSION=$1
+    local VERSION=$1
     [[ -z $VERSION ]] && error "Missing 'version' parameter for build_jres()"
-    FROM_TEMPLATE=$2
+    local FROM_TEMPLATE=$2
     [[ -z $FROM_TEMPLATE ]] && error "Missing 'from_template' parameter for build_jres()"
-    JRE_TEMPLATE=$3
+    local JRE_TEMPLATE=$3
     [[ -z $JRE_TEMPLATE ]] && error "Missing 'jre_template' parameter for build_jres()"
-    PLATFORM=$4
+    local PLATFORM=$4
     [[ -z $PLATFORM ]] && error "Missing 'platform' parameter for build_jres()"
 
     echo "Building for platform $PLATFORM ..."
 
     for t in ${JRES[@]}; do
-        FROM=${FROM_TEMPLATE/@/$t}
-        JRE=${JRE_TEMPLATE/@/$t}
-        TAGS=()
+        local FROM=${FROM_TEMPLATE/@/$t}
+        local JRE=${JRE_TEMPLATE/@/$t}
+        local TAGS=()
         if [[ "$PLATFORM" == "$DEFAULT_PLATFORM" ]]; then
             TAGS+=("$VERSION-$JRE")
             if [[ "$t" == "$DEFAULT_JRE" ]]; then
@@ -135,7 +140,7 @@ function build_jres() {
 }
 
 function build() {
-    VERSION=$1
+    local VERSION=$1
     [[ -z $VERSION ]] && error "Missing 'version' parameter for build()"
 
     echo "Building version $VERSION ..."
