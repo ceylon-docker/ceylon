@@ -21,6 +21,7 @@ IMAGE=docker.io/ceylon/ceylon
 
 BUILD=0
 PUSH=0
+QUIET=-q
 for arg in "$@"; do
     case "$arg" in
         --help)
@@ -37,6 +38,9 @@ for arg in "$@"; do
             ;;
         --push)
             PUSH=1
+            ;;
+        --verbose)
+            QUIET=
             ;;
     esac
 done
@@ -74,9 +78,9 @@ function build_dir() {
     rm -rf /tmp/docker-ceylon-build-templates
     if [[ $BUILD -eq 1 ]]; then
         echo "Pulling existing image from Docker Hub (if any)..."
-        docker pull "${IMAGE}:$NAME" > /dev/null
+        docker pull "${IMAGE}:$NAME" > /dev/null || true
         echo "Building image..."
-        docker build -t "${IMAGE}:$NAME" -q .
+        docker build -t "${IMAGE}:$NAME" $QUIET .
     fi
     [[ $PUSH -eq 1 ]] && echo "Pushing image to Docker Hub..." && docker push "${IMAGE}:$NAME"
     for t in ${TAGS[@]}; do
