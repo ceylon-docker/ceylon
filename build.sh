@@ -20,26 +20,39 @@ DEFAULT_PLATFORM="debian"
 IMAGE=docker.io/ceylon/ceylon
 
 BUILD=0
+PULL=0
 PUSH=0
+CLEAN=0
+VERBOSE=0
 QUIET=-q
 for arg in "$@"; do
     case "$arg" in
         --help)
-            echo "Usage: $0 [--help] [--build] [--push]"
+            echo "Usage: $0 [--help] [--pull] [--build] [--push] [--clean] [--verbose]"
             echo ""
-            echo "   --help   : shows this help text"
-            echo "   --build  : runs 'docker build' for each image"
-            echo "   --push   : pushes each image to Docker Hub"
+            echo "   --help    : shows this help text"
+            echo "   --push    : pulls any previously existing images from Docker Hub"
+            echo "   --build   : runs 'docker build' for each image"
+            echo "   --push    : pushes each image to Docker Hub"
+            echo "   --clean   : removes local images"
+            echo "   --verbose : show more information while running docker commands"
             echo ""
             exit
             ;;
         --build)
             BUILD=1
             ;;
+        --pull)
+            PULL=1
+            ;;
         --push)
             PUSH=1
             ;;
+        --clean)
+            CLEAN=1
+            ;;
         --verbose)
+            VERBOSE=1
             QUIET=
             ;;
     esac
@@ -76,9 +89,15 @@ function build_dir() {
     pushd "$NAME" > /dev/null
     cp /tmp/docker-ceylon-build-templates/* .
     rm -rf /tmp/docker-ceylon-build-templates
-    if [[ $BUILD -eq 1 ]]; then
+    if [[ $PULL -eq 1 ]]; then
         echo "Pulling existing image from Docker Hub (if any)..."
-        docker pull "${IMAGE}:$NAME" > /dev/null || true
+        if [[ $VERBOSE -eq 1 ]]; then
+            docker pull "${IMAGE}:$NAME" || true
+        else
+            docker pull "${IMAGE}:$NAME" > /dev/null || true
+        fi
+    fi
+    if [[ $BUILD -eq 1 ]]; then
         echo "Building image..."
         docker build -t "${IMAGE}:$NAME" $QUIET .
     fi
@@ -87,6 +106,13 @@ function build_dir() {
         [[ $BUILD -eq 1 ]] && docker tag "${IMAGE}:$NAME" "${IMAGE}:$t"
         [[ $PUSH -eq 1 ]] && docker push "${IMAGE}:$t"
     done
+    if [[ $CLEAN -eq 1 ]]; then
+        echo "Removing image..."
+        docker rmi "${IMAGE}:$NAME"
+        for t in ${TAGS[@]}; do
+            docker rmi "${IMAGE}:$t"
+        done
+    fi
     popd > /dev/null
 }
 
