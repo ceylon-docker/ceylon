@@ -85,8 +85,8 @@ function build_dir() {
     cp templates/$DOCKERFILE /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@FROM@@/$FROM/g" /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@VERSION@@/$VERSION/g" /tmp/docker-ceylon-build-templates/Dockerfile
-    mkdir -p "$NAME"
-    pushd "$NAME" > /dev/null
+    mkdir -p "$VERSION/$NAME"
+    pushd "$VERSION/$NAME" > /dev/null
     cp /tmp/docker-ceylon-build-templates/* .
     rm -rf /tmp/docker-ceylon-build-templates
     if [[ $PULL -eq 1 ]]; then
