@@ -145,8 +145,8 @@ function build() {
 
     echo "Building version $VERSION ..."
 
-    build_jres $VERSION "java:@-jre" "jre@" "debian"
-    build_jres $VERSION "jboss\\/base-jdk:@" "jre@" "redhat"
+    build_jres $VERSION "ceylon\\/ceylon-base:jre@-debian" "jre@" "debian"
+    build_jres $VERSION "ceylon\\/ceylon-base:jre@-redhat" "jre@" "redhat"
 }
 
 for v in ${VERSIONS[@]}; do
