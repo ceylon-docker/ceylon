@@ -83,7 +83,7 @@ function build_dir() {
     mkdir /tmp/docker-ceylon-build-templates
     [[ $INCLUDE_BOOTSTRAP -eq 1 ]] && cp templates/bootstrap.sh /tmp/docker-ceylon-build-templates/
     cp templates/$DOCKERFILE /tmp/docker-ceylon-build-templates/Dockerfile
-    sed -i "s/@@FROM@@/$FROM/g" /tmp/docker-ceylon-build-templates/Dockerfile
+    sed -i "s/@@FROM@@/${FROM//\//\\/}/g" /tmp/docker-ceylon-build-templates/Dockerfile
     sed -i "s/@@VERSION@@/$VERSION/g" /tmp/docker-ceylon-build-templates/Dockerfile
     mkdir -p "$VERSION/$NAME"
     pushd "$VERSION/$NAME" > /dev/null
@@ -92,8 +92,10 @@ function build_dir() {
     if [[ $PULL -eq 1 ]]; then
         echo "Pulling existing image from Docker Hub (if any)..."
         if [[ $VERBOSE -eq 1 ]]; then
+            docker pull "$FROM" || true
             docker pull "${IMAGE}:$NAME" || true
         else
+            docker pull "$FROM" > /dev/null || true
             docker pull "${IMAGE}:$NAME" > /dev/null || true
         fi
     fi
@@ -137,7 +139,7 @@ function build_normal_onbuild() {
 
     local NAME="$VERSION-$JRE-$PLATFORM"
     build_dir $VERSION $FROM $NAME "Dockerfile.$PLATFORM" 1 "${TAGS[@]}"
-    build_dir $VERSION "ceylon\\/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 0 "${OBTAGS[@]}"
+    build_dir $VERSION "ceylon/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 0 "${OBTAGS[@]}"
 }
 
 function build_jres() {
@@ -175,8 +177,8 @@ function build() {
 
     echo "Building version $VERSION ..."
 
-    build_jres $VERSION "ceylon\\/ceylon-base:jre@-debian" "jre@" "debian"
-    build_jres $VERSION "ceylon\\/ceylon-base:jre@-redhat" "jre@" "redhat"
+    build_jres $VERSION "ceylon/ceylon-base:jre@-debian" "jre@" "debian"
+    build_jres $VERSION "ceylon/ceylon-base:jre@-redhat" "jre@" "redhat"
 }
 
 for v in ${VERSIONS[@]}; do
