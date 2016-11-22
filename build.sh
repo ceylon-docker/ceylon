@@ -31,7 +31,7 @@ for arg in "$@"; do
             echo "Usage: $0 [--help] [--pull] [--build] [--push] [--clean] [--verbose]"
             echo ""
             echo "   --help    : shows this help text"
-            echo "   --push    : pulls any previously existing images from Docker Hub"
+            echo "   --pull    : pulls any previously existing images from Docker Hub"
             echo "   --build   : runs 'docker build' for each image"
             echo "   --push    : pushes each image to Docker Hub"
             echo "   --clean   : removes local images"
@@ -166,6 +166,12 @@ function build_jres() {
                     TAGS+=("latest")
                 fi
             fi
+            if [[ "$VERSION" == "$LATEST" ]]; then
+                TAGS+=("latest-$JRE")
+            fi
+        fi
+        if [[ "$VERSION" == "$LATEST" ]]; then
+            TAGS+=("latest-$JRE-$PLATFORM")
         fi
         build_normal_onbuild $VERSION $FROM $JRE $PLATFORM "${TAGS[@]}"
     done
