@@ -2,23 +2,23 @@
 
 The following images/tags are available using a base Debian image:
 
- - `1.3.1-jre8-debian`, `1.3.1-jre8`, `1.3.1`, `latest` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-debian/Dockerfile))
- - `1.3.0-jre8-debian`, `1.3.0-jre8`, `1.3.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-debian/Dockerfile))
- - `1.2.2-jre8-debian`, `1.2.2-jre8`, `1.2.2` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-debian/Dockerfile))
- - `1.2.1-jre8-debian`, `1.2.1-jre8`, `1.2.1` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-debian/Dockerfile))
- - `1.2.0-jre8-debian`, `1.2.0-jre8`, `1.2.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-debian/Dockerfile))
- - `1.1.0-jre8-debian`, `1.1.0-jre8`, `1.1.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-debian/Dockerfile))
- - `1.0.0-jre8-debian`, `1.0.0-jre8`, `1.0.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-debian/Dockerfile))
+ - `1.3.1-jre8-debian`, `1.3.1-jre8`, `1.3.1`, `latest-jre8-debian`, `latest-jre8`, `latest` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-debian/Dockerfile))
+ - `1.3.0-jre8-debian`, `1.3.0-jre8`, `1.3.0-debian`, `1.3.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-debian/Dockerfile))
+ - `1.2.2-jre8-debian`, `1.2.2-jre8`, `1.2.2-debian`, `1.2.2` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-debian/Dockerfile))
+ - `1.2.1-jre8-debian`, `1.2.1-jre8`, `1.2.1-debian`, `1.2.1` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-debian/Dockerfile))
+ - `1.2.0-jre8-debian`, `1.2.0-jre8`, `1.2.0-debian`, `1.2.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-debian/Dockerfile))
+ - `1.1.0-jre8-debian`, `1.1.0-jre8`, `1.1.0-debian`, `1.1.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-debian/Dockerfile))
+ - `1.0.0-jre8-debian`, `1.0.0-jre8`, `1.0.0-debian`, `1.0.0` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-debian/Dockerfile))
 
 And the following images/tags are available using a base RedHat/CentOS image:
 
- - `1.3.1-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-redhat/Dockerfile))
- - `1.3.0-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-redhat/Dockerfile))
- - `1.2.2-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-redhat/Dockerfile))
- - `1.2.1-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-redhat/Dockerfile))
- - `1.2.0-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-redhat/Dockerfile))
- - `1.1.0-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-redhat/Dockerfile))
- - `1.0.0-jre8-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-redhat/Dockerfile))
+ - `1.3.1-jre8-redhat`, `1.3.1-redhat`, `latest-jre8-redhat`, `latest-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-redhat/Dockerfile))
+ - `1.3.0-jre8-redhat`, `1.3.0-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-redhat/Dockerfile))
+ - `1.2.2-jre8-redhat`, `1.2.2-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-redhat/Dockerfile))
+ - `1.2.1-jre8-redhat`, `1.2.1-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-redhat/Dockerfile))
+ - `1.2.0-jre8-redhat`, `1.2.0-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-redhat/Dockerfile))
+ - `1.1.0-jre8-redhat`, `1.1.0-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-redhat/Dockerfile))
+ - `1.0.0-jre8-redhat`, `1.0.0-redhat` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-redhat/Dockerfile))
 
 And in all these cases you can also specify `jre7` instead of `jre8`.
 
@@ -30,23 +30,23 @@ These ONBUILD images make life a little easier by adding a couple of features. F
 
 The Debian based ONBUILD versions:
 
- - `1.3.1-jre8-debian-onbuild`, `1.3.1-jre8-onbuild`, `1.3.1-onbuild`, `latest-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-debian-onbuild/Dockerfile))
- - `1.3.0-jre8-debian-onbuild`, `1.3.0-jre8-onbuild`, `1.3.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-debian-onbuild/Dockerfile))
- - `1.2.2-jre8-debian-onbuild`, `1.2.2-jre8-onbuild`, `1.2.2-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-debian-onbuild/Dockerfile))
- - `1.2.1-jre8-debian-onbuild`, `1.2.1-jre8-onbuild`, `1.2.1-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-debian-onbuild/Dockerfile))
- - `1.2.0-jre8-debian-onbuild`, `1.2.0-jre8-onbuild`, `1.2.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-debian-onbuild/Dockerfile))
- - `1.1.0-jre8-debian-onbuild`, `1.1.0-jre8-onbuild`, `1.1.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-debian-onbuild/Dockerfile))
- - `1.0.0-jre8-debian-onbuild`, `1.0.0-jre8-onbuild`, `1.0.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-debian-onbuild/Dockerfile))
+ - `1.3.1-jre8-debian-onbuild`, `1.3.1-jre8-onbuild`, `1.3.1-onbuild`, `latest-jre8-debian-onbuild`, `latest-jre8-onbuild`, `latest-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-debian-onbuild/Dockerfile))
+ - `1.3.0-jre8-debian-onbuild`, `1.3.0-jre8-onbuild`, `1.3.0-debian-onbuild`, `1.3.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-debian-onbuild/Dockerfile))
+ - `1.2.2-jre8-debian-onbuild`, `1.2.2-jre8-onbuild`, `1.2.2-debian-onbuild`, `1.2.2-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-debian-onbuild/Dockerfile))
+ - `1.2.1-jre8-debian-onbuild`, `1.2.1-jre8-onbuild`, `1.2.1-debian-onbuild`, `1.2.1-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-debian-onbuild/Dockerfile))
+ - `1.2.0-jre8-debian-onbuild`, `1.2.0-jre8-onbuild`, `1.2.0-debian-onbuild`, `1.2.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-debian-onbuild/Dockerfile))
+ - `1.1.0-jre8-debian-onbuild`, `1.1.0-jre8-onbuild`, `1.1.0-debian-onbuild`, `1.1.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-debian-onbuild/Dockerfile))
+ - `1.0.0-jre8-debian-onbuild`, `1.0.0-jre8-onbuild`, `1.0.0-debian-onbuild`, `1.0.0-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-debian-onbuild/Dockerfile))
 
 The RedHat/CentOS based ONBUILD versions:
 
- - `1.3.1-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-redhat-onbuild/Dockerfile))
- - `1.3.0-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-redhat-onbuild/Dockerfile))
- - `1.2.2-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-redhat-onbuild/Dockerfile))
- - `1.2.1-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-redhat-onbuild/Dockerfile))
- - `1.2.0-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-redhat-onbuild/Dockerfile))
- - `1.1.0-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-redhat-onbuild/Dockerfile))
- - `1.0.0-jre8-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-redhat-onbuild/Dockerfile))
+ - `1.3.1-jre8-redhat-onbuild`, `1.3.1-redhat-onbuild`, `latest-jre8-redhat-onbuild`, `latest-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-redhat-onbuild/Dockerfile))
+ - `1.3.0-jre8-redha-onbuildt`, `1.3.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-redhat-onbuild/Dockerfile))
+ - `1.2.2-jre8-redhat-onbuild`, `1.2.2-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-redhat-onbuild/Dockerfile))
+ - `1.2.1-jre8-redhat-onbuild`, `1.2.1-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-redhat-onbuild/Dockerfile))
+ - `1.2.0-jre8-redhat-onbuild`, `1.2.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-redhat-onbuild/Dockerfile))
+ - `1.1.0-jre8-redhat-onbuild`, `1.1.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.1.0/1.1.0-jre8-redhat-onbuild/Dockerfile))
+ - `1.0.0-jre8-redhat-onbuild`, `1.0.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.0.0/1.0.0-jre8-redhat-onbuild/Dockerfile))
 
 And just like the earlier, non-ONBUILD images, in all these cases you can also specify `jre7` instead of `jre8`.
 
