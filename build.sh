@@ -170,8 +170,14 @@ function build_jres() {
                 TAGS+=("latest-$JRE")
             fi
         fi
+        if [[ "$t" == "$DEFAULT_JRE" ]]; then
+            TAGS+=("$VERSION-$PLATFORM")
+        fi
         if [[ "$VERSION" == "$LATEST" ]]; then
             TAGS+=("latest-$JRE-$PLATFORM")
+            if [[ "$t" == "$DEFAULT_JRE" ]]; then
+                TAGS+=("latest-$PLATFORM")
+            fi
         fi
         build_normal_onbuild $VERSION $FROM $JRE $PLATFORM "${TAGS[@]}"
     done
