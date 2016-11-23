@@ -17,7 +17,7 @@ USER root
 RUN yum install -y ceylon-${CEYLON_VERSION} && \
     yum clean all
 
-USER ceylon
+USER 1000
 
 ADD bootstrap.sh /bootstrap.sh
 
