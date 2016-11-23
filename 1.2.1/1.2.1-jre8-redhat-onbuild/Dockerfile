@@ -3,9 +3,9 @@
 #
 FROM ceylon/ceylon:1.2.1-jre8-redhat
 
-USER ceylon
+USER 1000
 
-VOLUME /app
+VOLUME ${HOME}
 
-ONBUILD ADD . /app
+ONBUILD ADD . ${HOME}
 

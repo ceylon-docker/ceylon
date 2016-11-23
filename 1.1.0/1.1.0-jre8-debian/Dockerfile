@@ -18,7 +18,7 @@ RUN apt-get -y update && \
     apt-get install -y ceylon-${CEYLON_VERSION} && \
     apt-get clean
 
-USER ceylon
+USER 1000
 
 ADD bootstrap.sh /bootstrap.sh
 
