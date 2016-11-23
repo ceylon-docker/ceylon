@@ -26,7 +26,7 @@ And in all these cases you can also specify `jre7` instead of `jre8`.
 
 All of the above images are very minimal and don't do anything more than install Ceylon, create a `ceylon` user and an `/app` home folder for it. These images are very useful as a basis for other images but they are somewhat cumbersome to use when you want to whip up an image quickly. That's why for *all* of the above images there's also an `-onbuild` version (see the Docker documentation about [ONBUILD](https://docs.docker.com/engine/reference/builder/#/onbuild)), so for `2.0.0` there is a `2.0.0-onbuild` and for `1.1.0-jre8-redhat` there is a `1.1.0-jre8-redhat-onbuild` etc.
 
-These ONBUILD images make life a little easier by adding a couple of features. First of all it allows you to specify files in an `./app` folder next to your `Dockerfile` and they will be automatically added to your image. But you can go one step further and attach a volume to the container's `/app` path, giving you the possibility to persist information between runs.
+These ONBUILD images make life a little easier by adding a couple of features. First of all it allows you to put files in the folder next to your `Dockerfile` and they will be automatically added to your image. But you can go one step further and attach a volume to the container's `/app` path, giving you the possibility to persist information between runs.
 
 The Debian based ONBUILD versions:
 
@@ -41,7 +41,7 @@ The Debian based ONBUILD versions:
 The RedHat/CentOS based ONBUILD versions:
 
  - `1.3.1-jre8-redhat-onbuild`, `1.3.1-redhat-onbuild`, `latest-jre8-redhat-onbuild`, `latest-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.1/1.3.1-jre8-redhat-onbuild/Dockerfile))
- - `1.3.0-jre8-redha-onbuildt`, `1.3.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-redhat-onbuild/Dockerfile))
+ - `1.3.0-jre8-redhat-onbuild`, `1.3.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.3.0/1.3.0-jre8-redhat-onbuild/Dockerfile))
  - `1.2.2-jre8-redhat-onbuild`, `1.2.2-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.2/1.2.2-jre8-redhat-onbuild/Dockerfile))
  - `1.2.1-jre8-redhat-onbuild`, `1.2.1-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.1/1.2.1-jre8-redhat-onbuild/Dockerfile))
  - `1.2.0-jre8-redhat-onbuild`, `1.2.0-redhat-onbuild` ([ceylon/Dockerfile](https://github.com/ceylon-docker/ceylon/blob/master/1.2.0/1.2.0-jre8-redhat-onbuild/Dockerfile))
