@@ -139,7 +139,7 @@ function build_normal_onbuild() {
     done
 
     local NAME="$VERSION-$JRE-$PLATFORM"
-    build_dir $VERSION $FROM $NAME "Dockerfile.$PLATFORM" 1 "${TAGS[@]}"
+    build_dir $VERSION $FROM $NAME "Dockerfile.$JRE.$PLATFORM" 1 "${TAGS[@]}"
     build_dir $VERSION "ceylon/ceylon:$NAME" "$NAME-onbuild" "Dockerfile.onbuild" 0 "${OBTAGS[@]}"
 }
 
