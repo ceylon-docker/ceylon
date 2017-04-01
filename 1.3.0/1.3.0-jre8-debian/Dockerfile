@@ -16,7 +16,8 @@ USER root
 
 RUN apt-get -y update && \
     apt-get install -y ceylon-${CEYLON_VERSION} && \
-    apt-get clean
+    apt-get clean && \
+    dpkg --remove --force-depends openjdk-7-jre-headless openjdk-7-jre
 
 USER 1000
 
